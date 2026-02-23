@@ -1,1 +1,348 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>WAC Shield Ultimate PRO | The Ultimate WordPress Security Plugin</title>
+    <meta name="description" content="WAC Shield Ultimate PRO is the definitive security solution for WordPress. Features Geo-Blocking, Brute Force protection, and advanced perimeter defense against hackers.">
+    <meta name="keywords" content="wordpress security plugin, wp security pro, block country ip wordpress, brute force protection, wordpress hardening, wac shield ultimate">
+    <meta name="author" content="Wellington A. R. Cardoso">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tecxim.github.io/shield/">
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WAC Shield Ultimate PRO - Cyber-Secure Hardening">
+    <meta property="og:description" content="Block attacks from foreign hackers before they even touch your server. Geo-blocking and perimeter defense.">
+    <meta property="og:url" content="https://tecxim.github.io/shield/">
+    <meta property="og:site_name" content="WAC Shield">
+    <meta property="og:image" content="https://tecxim.github.io/shield/imagem-social.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WAC Shield Ultimate PRO | WordPress Security">
+    <meta name="twitter:description" content="Definitive perimeter defense against brute force and Geo-blocking for WordPress sites.">
+    <meta name="twitter:image" content="https://tecxim.github.io/shield/imagem-social.jpg">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#111827"> 
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "SoftwareApplication",
+      "name": "WAC Shield Ultimate PRO",
+      "operatingSystem": "WordPress",
+      "applicationCategory": "SecurityApplication",
+      "description": "Advanced WordPress security plugin featuring Geo-blocking and anti-hacking hardening.",
+      "offers": {
+        "@type": "Offer",
+        "price": "97.00",
+        "priceCurrency": "BRL"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "124"
+      }
+    }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-background {
+            background-image: url('https://images.unsplash.com/photo-1550508920-53268574384d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.98));
+        }
+        .glow-button {
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+            transform: translateY(-2px);
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(75, 85, 99, 0.4);
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: #10b981;
+        }
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            z-index: 1000;
+            background-color: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100">
+
+    <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center">
+                <img src="imagens/logo.png" alt="WAC Shield Logo" class="h-10 w-10 mr-2 rounded-full border border-green-500"> 
+                WAC Shield <span class="text-green-500 ml-1">PRO</span>
+            </a>
+            <div class="hidden md:flex space-x-6 font-medium">
+                <a href="#solution" class="hover:text-green-400 transition">Solution</a>
+                <a href="#benefits" class="hover:text-green-400 transition">Benefits</a>
+                <a href="#pricing" class="hover:text-green-400 transition">Pricing</a>
+                <a href="#faq" class="hover:text-green-400 transition">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-background relative py-20 md:py-36 text-center text-white overflow-hidden">
+        <div class="relative z-10 container mx-auto px-6">
+            <span class="bg-green-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 inline-block">Military-Grade Hardening</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in uppercase">
+                STOP BEING A TARGET FOR BOTNETS & HACKERS
+                <br><span class="text-green-500 italic">HARDEN YOUR WORDPRESS TODAY.</span>
+            </h1>
+            <p class="text-lg md:text-2xl mb-10 text-gray-300 max-w-4xl mx-auto animate-fade-in" style="animation-delay: 0.2s">
+                Meet <strong>WAC Shield Ultimate PRO</strong> – The security plugin that blocks brute force attacks and foreign access before they even touch your server.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s">
+                <a href="#pricing" class="bg-green-600 hover:bg-green-700 text-white font-extrabold py-4 px-10 rounded-lg text-xl flex items-center justify-center glow-button transition-all">
+                    SECURE MY SITE NOW
+                </a>
+            </div>
+            <p class="mt-6 text-sm text-gray-400 italic"><i class="fas fa-user-shield mr-2 text-green-500"></i> Fast installation and simplified configuration.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="solution" class="py-20 bg-gray-900 text-center px-6 border-b border-gray-800">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-white uppercase tracking-tight">Is your site slow or plagued by <span class="text-red-500">login failures</span>?</h2>
+                <div class="max-w-4xl mx-auto">
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+                        WordPress sites suffer intrusion attempts every second. Bots try to guess your password, which **drains your server's memory**, crashes your site, and compromises your data. Standard plugins only notify you after the attack has started.
+                    </p>
+                    <p class="text-2xl font-bold text-green-400 border-2 border-green-500/30 inline-block px-8 py-4 rounded-xl">
+                        WAC Shield stops the attack before it begins.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="py-20 bg-gray-800 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white uppercase">Advanced <span class="text-green-500">Perimeter Protection</span></h2>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <article class="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700 hover:border-green-500 transition-colors">
+                        <i class="fas fa-globe-americas text-5xl text-blue-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Active GeoShield</h3>
+                        <p class="text-gray-400">Instantly block traffic from any country. If your audience is local, prevent Russia, China, and other countries from even loading your site.</p>
+                    </article>
+                    <article class="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700 hover:border-green-500 transition-colors">
+                        <i class="fas fa-user-lock text-5xl text-red-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Anti-Brute Force</h3>
+                        <p class="text-gray-400">Smart system that bans IPs after consecutive errors. Blocking is progressive: the more they try, the longer the ban duration.</p>
+                    </article>
+                    <article class="bg-gray-900 p-8 rounded-2xl shadow-xl border border-gray-700 hover:border-green-500 transition-colors">
+                        <i class="fas fa-bolt text-5xl text-green-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Ultra-Lightweight</h3>
+                        <p class="text-gray-400">Unlike other plugins, WAC Shield runs before WordPress loads the database, saving CPU and keeping your site blazing fast.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-900 px-6">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-white uppercase italic">Real-Time Evidence</h2>
+                <p class="text-lg text-gray-400 mb-10 max-w-3xl mx-auto">
+                    Our intelligence system monitors global threats and blocks them silently. Take a look at the logs of a standard WordPress site:
+                </p>
+                <div class="bg-gray-800 p-4 rounded-2xl shadow-2xl border border-gray-700 inline-block w-full max-w-5xl">
+                    <img src="imagens/logs.png" alt="Log of blocked attacks by WAC Shield security plugin" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-800 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white uppercase">Who is it <span class="underline decoration-green-500">essential</span> for?</h2>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="text-center group">
+                        <div class="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition">
+                            <i class="fas fa-building text-3xl text-purple-400 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Agencies & Freelancers</h3>
+                        <p class="text-gray-400">Protect your client portfolio and avoid the stress of hacked or infected websites.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-20 h-20 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-500 transition">
+                            <i class="fas fa-rocket text-3xl text-yellow-400 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Digital Products</h3>
+                        <p class="text-gray-400">Don't let your site go down on launch day due to Denial of Service (DoS) attacks.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-red-500 transition">
+                            <i class="fas fa-shopping-bag text-3xl text-red-400 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">E-commerces (WooCommerce)</h3>
+                        <p class="text-gray-400">Absolute security for your customers' data and stability for your sales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-20 bg-gray-900 px-6">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white uppercase">Hardening Plans</h2>
+                <p class="text-center text-gray-400 mb-16">One-time annual investment for total peace of mind.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="pricing-card bg-gray-800 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                            <span class="text-gray-500 block mb-6 italic">1 Domain</span>
+                            <p class="text-5xl font-extrabold text-green-500 mb-8">R$ 97<span class="text-xl font-normal text-gray-400">/year</span></p>
+                            <ul class="text-left text-gray-400 space-y-4 mb-8">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Smart GeoShield</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Anti-Brute Force Protection</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Email Support</li>
+                                <li><i class="fas fa-times text-gray-600 mr-2"></i> Multi-site Dashboard</li>
+                            </ul>
+                        </div>
+                        <a href="https://mpago.la/1u65wB6" class="w-full bg-transparent border-2 border-green-500 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center uppercase">Buy Starter</a>
+                    </div>
+
+                    <div class="pricing-card bg-gray-800 p-8 rounded-2xl flex flex-col justify-between border-2 border-green-500 relative transform scale-105">
+                        <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500 text-black text-xs font-black px-4 py-1 rounded-full uppercase">Best Value</span>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">Professional</h3>
+                            <span class="text-gray-500 block mb-6 italic">Up to 5 Domains</span>
+                            <p class="text-5xl font-extrabold text-green-500 mb-8">R$ 247<span class="text-xl font-normal text-gray-400">/year</span></p>
+                            <ul class="text-left text-gray-300 space-y-4 mb-8">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> All Pro Protections</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Priority Support</strong></li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> License for 5 Sites</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Management Dashboard</li>
+                            </ul>
+                        </div>
+                        <a href="https://mpago.la/2uYbHr8" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center shadow-lg uppercase">Buy Professional</a>
+                    </div>
+
+                    <div class="pricing-card bg-gray-800 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">Agency</h3>
+                            <span class="text-gray-500 block mb-6 italic">Up to 50 Domains</span>
+                            <p class="text-5xl font-extrabold text-green-500 mb-8">R$ 497<span class="text-xl font-normal text-gray-400">/year</span></p>
+                            <ul class="text-left text-gray-400 space-y-4 mb-8">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> License for 50 sites</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Fleet Management</strong></li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> 24/7 VIP Support</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i> Optional White Label</li>
+                            </ul>
+                        </div>
+                        <a href="https://mpago.la/1UPoVKu" class="w-full bg-transparent border-2 border-green-500 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center uppercase">Buy Agency</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-20 bg-gray-800 px-6">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white uppercase italic">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <details class="bg-gray-900 p-6 rounded-xl border border-gray-700 cursor-pointer group">
+                        <summary class="text-lg font-bold text-white list-none flex justify-between items-center group-open:text-green-500 transition">
+                            Will WAC Shield slow down my website?
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </summary>
+                        <p class="text-gray-400 mt-4 leading-relaxed">No. It was developed with extreme performance in mind. Blocking occurs at the WordPress <code>init</code> level, saving server resources that would otherwise be spent processing a fake login attempt.</p>
+                    </details>
+                    <details class="bg-gray-900 p-6 rounded-xl border border-gray-700 cursor-pointer group">
+                        <summary class="text-lg font-bold text-white list-none flex justify-between items-center group-open:text-green-500 transition">
+                            What if I get blocked by mistake?
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </summary>
+                        <p class="text-gray-400 mt-4 leading-relaxed">You can easily add your IP to the Whitelist. If you are blocked after too many password attempts, simply switch networks (use your mobile data) or access the database via your hosting panel as explained in our documentation.</p>
+                    </details>
+                    <details class="bg-gray-900 p-6 rounded-xl border border-gray-700 cursor-pointer group">
+                        <summary class="text-lg font-bold text-white list-none flex justify-between items-center group-open:text-green-500 transition">
+                            How do I receive access?
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </summary>
+                        <p class="text-gray-400 mt-4 leading-relaxed">Delivery is immediate and automatic. As soon as the payment is approved, you will receive the plugin's <strong>.zip</strong> file and the PDF installation guide in your email.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-500">
+        <div class="container mx-auto px-6">
+            <p class="mb-2 font-bold text-white">WAC Shield Ultimate PRO &copy; 2026</p>
+            <p>Developed with excellence by <span class="text-green-500 font-bold">Wellington A. R. Cardoso</span></p>
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="#" class="hover:text-green-500 transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="hover:text-green-500 transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-green-500 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5511999402929?text=Hi!%20I'm%20interested%20in%20WAC%20Shield%20PRO." target="_blank" class="whatsapp-button" aria-label="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Basic inspection block
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) {
+                return false;
+            }
+        };
+
+        // Smooth Scroll fallback
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
