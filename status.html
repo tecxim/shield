@@ -111,36 +111,38 @@ function timeoutFetch(url, ms = 4000) {
 }
 
 async function check() {
-    document.getElementById("time").innerText = new Date().toLocaleString();
+    const timeEl = document.getElementById("time");
+    if(timeEl) timeEl.innerText = new Date().toLocaleString();
 
+    const workerUrl = "https://wac-shield-bridge.suportewrsystems.workers.dev";
     let ok = true;
 
-    // BRIDGE
+    // --- TESTE 1: Cloud Bridge (Ping) ---
     try {
-        const res = await timeoutFetch("https://wac-shield-bridge.suportewrsystems.workers.dev/ping");
-        if (!res.ok) throw new Error();
-        setStatus("bridge", true, "Operational");
+        const res = await fetch(`${workerUrl}/ping?t=${Date.now()}`);
+        setStatus("bridge", res.ok, res.ok ? "Operational" : "Offline");
+        if(!res.ok) ok = false;
     } catch {
         setStatus("bridge", false, "Offline");
         ok = false;
     }
 
-    // GITHUB
+    // --- TESTE 2: GitHub (Oficial) ---
     try {
-        const res = await timeoutFetch("https://api.github.com/zen");
-        if (!res.ok) throw new Error();
-        setStatus("github", true, "Connected");
+        const res = await fetch("https://api.github.com/zen");
+        setStatus("github", res.ok, res.ok ? "Connected" : "Issues");
+        if(!res.ok) ok = false;
     } catch {
         setStatus("github", false, "Issues");
         ok = false;
     }
 
-    // WORKER STATUS
+    // --- TESTE 3: Worker Status (JSON) ---
     try {
-        const res = await timeoutFetch("https://wac-shield-bridge.suportewrsystems.workers.dev/status");
-        if (!res.ok) throw new Error();
+        const res = await fetch(`${workerUrl}/status?t=${Date.now()}`);
         const data = await res.json();
         setStatus("worker", data.status === "online", data.status === "online" ? "Online" : "Offline");
+        if(data.status !== "online") ok = false;
     } catch {
         setStatus("worker", false, "Offline");
         ok = false;
@@ -148,6 +150,10 @@ async function check() {
 
     addHistory(ok);
 }
+
+// Inicia a verificação e define intervalo
+check();
+setInterval(check, 30000);
 
 check();
 setInterval(check, 30000);
