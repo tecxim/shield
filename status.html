@@ -86,4 +86,65 @@ let checks = [];
 
 function setStatus(id, ok, label) {
     const el = document.getElementById(id);
-    el.className = "status " + (ok ? "online" : "offline"
+    el.className = "status " + (ok ? "online" : "offline");
+    el.innerText = label;
+}
+
+function addHistory(ok) {
+    checks.push(ok);
+    if (checks.length > 30) checks.shift();
+
+    const historyEl = document.getElementById("history");
+    historyEl.innerHTML = "";
+
+    checks.forEach(c => {
+        const bar = document.createElement("div");
+        bar.className = "bar " + (c ? "ok" : "fail");
+        historyEl.appendChild(bar);
+    });
+
+    const uptime = (checks.filter(x => x).length / checks.length) * 100;
+    document.getElementById("uptime").innerText = uptime.toFixed(1) + "%";
+}
+
+function timeoutFetch(url, ms = 4000) {
+    return Promise.race([
+        fetch(url),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms))
+    ]);
+}
+
+async function check() {
+    document.getElementById("time").innerText = new Date().toLocaleString();
+
+    let ok = true;
+
+    // BRIDGE
+    try {
+        const res = await timeoutFetch("https://wac-shield-bridge.suportewrsystems.workers.dev/ping");
+        if (!res.ok) throw new Error();
+        setStatus("bridge", true, "Operational");
+    } catch {
+        setStatus("bridge", false, "Offline");
+        ok = false;
+    }
+
+    // GITHUB
+    try {
+        const res = await timeoutFetch("https://api.github.com/zen");
+        if (!res.ok) throw new Error();
+        setStatus("github", true, "Connected");
+    } catch {
+        setStatus("github", false, "Issues");
+        ok = false;
+    }
+
+    addHistory(ok);
+}
+
+check();
+setInterval(check, 30000);
+</script>
+
+</body>
+</html>
