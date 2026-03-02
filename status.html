@@ -104,44 +104,46 @@ function addHistory(ok) {
 }
 
 function timeoutFetch(url, ms = 4000) {
-    return Promise.race([
+    return Promise.race([async function check() {
         fetch(url),
         new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms))
     ]);
 }
 
 async function check() {
-    document.getElementById("time").innerText = new Date().toLocaleString();
+    const timeEl = document.getElementById("time");
+    if(timeEl) timeEl.innerText = new Date().toLocaleString();
 
     let ok = true;
+    const workerUrl = "https://wac-shield-bridge.suportewrsystems.workers.dev";
 
-    // BRIDGE
+    // 1. TESTE BRIDGE (PING)
     try {
-        const res = await timeoutFetch("https://wac-shield-bridge.suportewrsystems.workers.dev/ping");
+        const res = await timeoutFetch(`${workerUrl}/ping?t=${Date.now()}`);
         if (!res.ok) throw new Error();
         setStatus("bridge", true, "Operational");
-    } catch {
+    } catch (e) {
         setStatus("bridge", false, "Offline");
         ok = false;
     }
 
-    // GITHUB
+    // 2. TESTE GITHUB
     try {
         const res = await timeoutFetch("https://api.github.com/zen");
         if (!res.ok) throw new Error();
         setStatus("github", true, "Connected");
-    } catch {
+    } catch (e) {
         setStatus("github", false, "Issues");
         ok = false;
     }
 
-    // WORKER STATUS
+    // 3. TESTE WORKER JSON
     try {
-        const res = await timeoutFetch("https://wac-shield-bridge.suportewrsystems.workers.dev/status");
+        const res = await timeoutFetch(`${workerUrl}/status?t=${Date.now()}`);
         if (!res.ok) throw new Error();
         const data = await res.json();
         setStatus("worker", data.status === "online", data.status === "online" ? "Online" : "Offline");
-    } catch {
+    } catch (e) {
         setStatus("worker", false, "Offline");
         ok = false;
     }
