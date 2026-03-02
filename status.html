@@ -96,10 +96,9 @@
         // --- TESTE 1: CLOUD BRIDGE (API) ---
         try {
             // No seu status.html (JavaScript)
-            const bridgeRes = await fetch('https://wac-shield-bridge.suportewrsystems.workers.dev/update', { 
-                method: 'HEAD', // <--- Isso testa a conexão sem pesar no servidor
-                mode: 'cors' 
-            });
+            const bridgeRes = await fetch('https://wac-shield-bridge.suportewrsystems.workers.dev/ping');
+
+            if (!bridgeRes.ok) throw new Error();
             // Se o fetch não der erro, consideramos online
             document.getElementById('bridge-status').innerHTML = '<span class="pulse"></span> Operational';
             document.getElementById('bridge-error').style.display = 'none';
