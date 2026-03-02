@@ -127,11 +127,13 @@ async function check() {
         ok = false;
     }
 
-    // --- TESTE 2: GitHub (Oficial) ---
+    // --- TESTE 2: GitHub (Via Worker para evitar erro 403) ---
     try {
-        const res = await fetch("https://api.github.com/zen");
-        setStatus("github", res.ok, res.ok ? "Connected" : "Issues");
-        if(!res.ok) ok = false;
+        const res = await fetch(`${workerUrl}/check-github?t=${Date.now()}`);
+        const data = await res.json();
+        const isGithubOk = data.status === "online";
+        setStatus("github", isGithubOk, isGithubOk ? "Connected" : "Issues");
+        if(!isGithubOk) ok = false;
     } catch {
         setStatus("github", false, "Issues");
         ok = false;
