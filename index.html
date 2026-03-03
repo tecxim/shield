@@ -35,6 +35,11 @@
 
     <link rel="alternate" hreflang="en" href="https://tecxim.github.io/shield/en/" />
     <link rel="alternate" hreflang="pt-br" href="https://tecxim.github.io/shield/" />
+
+     <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <script type="application/ld+json">
     {
@@ -57,337 +62,944 @@
     }
     </script>
 
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .hero-background {
-            background-image: url('https://images.unsplash.com/photo-1550508920-53268574384d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
+   <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0C0F;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        .hero-background::before {
+
+        /* Glass Morphism */
+        .glass {
+            background: rgba(20, 24, 28, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(75, 85, 99, 0.2);
+        }
+        
+        .glass-card {
+            background: rgba(17, 21, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        /* Hero Background */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, #0B0F13 0%, #0F1A14 50%, #0B0F13 100%);
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.98));
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
         }
-        .glow-button {
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Button Effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+            box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 30px -5px rgba(34, 197, 94, 0.5);
+        }
+        
+        .btn-outline {
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            background: transparent;
             transition: all 0.3s ease;
         }
-        .glow-button:hover {
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+        
+        .btn-outline:hover {
+            border-color: #22C55E;
+            background: rgba(34, 197, 94, 0.1);
             transform: translateY(-2px);
         }
+
+        /* Card Effects */
+        .feature-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(26, 30, 35, 0.9) 0%, rgba(17, 21, 25, 0.95) 100%);
+            border: 1px solid rgba(75, 85, 99, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #22C55E, transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Pricing Card */
         .pricing-card {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(75, 85, 99, 0.4);
+            background: linear-gradient(145deg, rgba(26, 30, 35, 0.9) 0%, rgba(17, 21, 25, 0.95) 100%);
+            border: 1px solid rgba(75, 85, 99, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            border-color: #10b981;
+        
+        .pricing-card.featured {
+            border: 2px solid #22C55E;
+            transform: scale(1.05);
+            box-shadow: 0 30px 50px -20px rgba(34, 197, 94, 0.5);
         }
-        .whatsapp-button {
+        
+        .pricing-card.featured::after {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: #22C55E;
+            color: black;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
             position: fixed;
-            bottom: 20px; right: 20px;
-            z-index: 1000;
-            background-color: #25D366;
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Mobile Menu */
+        .mobile-menu {
             transition: all 0.3s ease;
         }
-        .whatsapp-button:hover {
-            transform: scale(1.1);
+
+        /* Stats Counter */
+        .stat-item {
+            transition: all 0.3s ease;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem !important; }
+            h2 { font-size: 2rem !important; }
+            .pricing-card.featured { transform: scale(1); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: #0A0C0F;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1A1E23;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #22C55E, #16A34A);
+            border-radius: 5px;
+        }
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 selection:bg-green-500 selection:text-white">
+<body class="text-gray-100 antialiased">
 
-    <nav class="bg-gray-900/80 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white flex items-center group">
-                <div class="relative">
-                    <img src="imagens/logo.png" alt="WAC Shield Logo" class="h-10 w-10 mr-2 rounded-full border border-green-500 transition-transform group-hover:scale-110">
-                    <div class="absolute inset-0 rounded-full bg-green-500/20 animate-ping"></div>
+    <!-- Navbar -->
+    <nav class="glass fixed w-full z-50 top-0 px-4 lg:px-8">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative">
+                        <img src="imagens/logo.png" alt="WAC Shield" class="h-12 w-12 rounded-xl border-2 border-green-500/30 group-hover:border-green-500 transition-all duration-300">
+                        <div class="absolute inset-0 rounded-xl bg-green-500/20 animate-ping"></div>
+                    </div>
+                    <span class="text-2xl font-black tracking-tight">
+                        WAC<span class="text-green-500 ml-1">SHIELD</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#solucao" class="text-sm font-medium hover:text-green-500 transition-colors duration-300">Solução</a>
+                    <a href="#beneficios" class="text-sm font-medium hover:text-green-500 transition-colors duration-300">Recursos</a>
+                    <a href="#precos" class="text-sm font-medium hover:text-green-500 transition-colors duration-300">Preços</a>
+                    <a href="#faq" class="text-sm font-medium hover:text-green-500 transition-colors duration-300">FAQ</a>
+                    <a href="en/" class="px-3 py-1 text-xs border border-gray-700 rounded-full hover:border-green-500 hover:text-green-500 transition">EN</a>
+                    <a href="#precos" class="btn-primary px-6 py-3 rounded-xl text-sm font-bold text-white">BAIXAR AGORA</a>
                 </div>
-                WAC Shield <span class="text-green-500 ml-1">PRO</span>
-            </a>
 
-            <button id="btn-mobile" class="md:hidden text-white focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="lg:hidden w-12 h-12 rounded-xl glass flex items-center justify-center text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
 
-            <div id="menu-links" class="hidden md:flex items-center space-x-8 font-medium">
-                <a href="#solucao" class="hover:text-green-400 transition">Solução</a>
-                <a href="#beneficios" class="hover:text-green-400 transition">Vantagens</a>
-                <a href="#precos" class="hover:text-green-400 transition">Preços</a>
-                <a href="#faq" class="hover:text-green-400 transition">Dúvidas</a>
-                <a href="en/" class="text-xs border border-gray-600 px-2 py-1 rounded hover:border-green-500 hover:text-green-500 transition">EN</a>
-                <a href="#precos" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full text-sm font-bold transition transform hover:scale-105">BAIXAR AGORA</a>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="lg:hidden hidden mobile-menu glass rounded-2xl mt-2 p-6">
+            <div class="flex flex-col gap-4">
+                <a href="#solucao" class="py-3 px-4 rounded-xl hover:bg-green-500/10 transition">Solução</a>
+                <a href="#beneficios" class="py-3 px-4 rounded-xl hover:bg-green-500/10 transition">Recursos</a>
+                <a href="#precos" class="py-3 px-4 rounded-xl hover:bg-green-500/10 transition">Preços</a>
+                <a href="#faq" class="py-3 px-4 rounded-xl hover:bg-green-500/10 transition">FAQ</a>
+                <div class="flex items-center justify-between pt-2 border-t border-gray-800">
+                    <a href="en/" class="px-4 py-2 border border-gray-700 rounded-full text-sm">EN</a>
+                    <a href="#precos" class="btn-primary px-6 py-3 rounded-xl text-sm font-bold">BAIXAR AGORA</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero-background relative py-24 md:py-44 text-center overflow-hidden">
-        <div class="relative z-10 container mx-auto px-6">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-green-400 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-tighter mb-8 animate-fade-in">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                Proteção Ativa em Tempo Real: v3.0.10
-            </div>
-            
-            <h1 class="text-4xl md:text-7xl font-black leading-tight mb-8 animate-fade-in italic uppercase">
-                O FIM DOS ATAQUES<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">NO SEU WORDPRESS.</span>
-            </h1>
-            
-            <p class="text-lg md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto animate-fade-in opacity-90 leading-relaxed" style="animation-delay: 0.2s">
-                Bloqueie hackers estrangeiros e robôs maliciosos antes mesmo de tocarem no seu servidor. <strong>Blindagem inteligente</strong> com impacto zero na velocidade do site.
-            </p>
-            
-            <div class="flex flex-col md:flex-row justify-center gap-6 animate-fade-in" style="animation-delay: 0.4s">
-                <a href="#precos" class="bg-green-600 hover:bg-green-700 text-white font-black py-5 px-12 rounded-2xl text-xl glow-button transition-all transform uppercase tracking-tight">
-                    Blindar meu site agora
-                </a>
-                <div class="flex items-center justify-center gap-2 text-gray-400 font-medium">
-                    <i class="fas fa-check-circle text-green-500"></i> Instalação em 2 minutos
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen flex items-center pt-20 relative">
+        <div class="grid-bg absolute inset-0 opacity-30"></div>
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto text-center">
+                
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-3 glass rounded-full px-6 py-3 mb-12 animate-fade-up">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="text-sm font-medium tracking-wider">PROTEÇÃO ATIVA v3.0.10 • TEMPO REAL</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="text-5xl lg:text-7xl xl:text-8xl font-black leading-[0.9] mb-8 animate-fade-up delay-1">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-green-500 to-emerald-600">
+                        O FIM DOS
+                    </span>
+                    <br>
+                    <span class="text-white">ATAQUES WORDPRESS</span>
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-12 animate-fade-up delay-2">
+                    Bloqueie hackers e robôs maliciosos antes mesmo de tocarem no seu servidor. 
+                    <span class="text-green-500 font-semibold">Impacto zero na velocidade.</span>
+                </p>
+
+                <!-- CTA -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up delay-3">
+                    <a href="#precos" class="btn-primary px-12 py-6 rounded-2xl text-xl font-black tracking-tight w-full sm:w-auto">
+                        BLINDAR SITE AGORA
+                    </a>
+                    <div class="flex items-center gap-3 text-gray-400">
+                        <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        <span class="text-sm">Instalação em 2 minutos</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-20 border-t border-gray-800/50">
+                    <div class="stat-item">
+                        <div class="text-3xl font-black text-green-500">15M+</div>
+                        <div class="text-sm text-gray-500">Ameaças Bloqueadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="text-3xl font-black text-green-500">99.9%</div>
+                        <div class="text-sm text-gray-500">Efetividade</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="text-3xl font-black text-green-500">0ms</div>
+                        <div class="text-sm text-gray-500">Latência</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="text-3xl font-black text-green-500">24/7</div>
+                        <div class="text-sm text-gray-500">Proteção</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section id="solucao" class="py-24 bg-gray-900 px-6 border-b border-gray-800">
-            <div class="container mx-auto max-w-5xl">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                            Seu site está sendo <span class="text-red-500">atacado</span> agora mesmo.
-                        </h2>
-                        <p class="text-lg text-gray-400 mb-6 leading-relaxed">
-                            Milhares de robôs tentam invadir seu painel administrativo diariamente. Isso não apenas rouba seus dados, mas <strong>consome toda a memória do seu servidor</strong>, deixando o site lento para seus clientes.
-                        </p>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Elimine lentidão causada por tráfego de robôs.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-shield-virus text-green-500 mt-1"></i> <span>Dê um "ponto final" em ataques de Força Bruta.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-globe text-blue-500 mt-1"></i> <span>Impeça acessos de países sem interesse comercial.</span></li>
-                        </ul>
-                    </div>
-                    <div class="relative group">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                        <div class="relative bg-gray-800 rounded-2xl overflow-hidden shadow-2xl">
-                            <img src="imagens/log.png" alt="Log de Proteção" class="w-full h-auto">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="beneficios" class="py-24 bg-gray-800/50 px-6">
-            <div class="container mx-auto">
-                <div class="text-center mb-20">
-                    <h2 class="text-4xl font-black mb-4 uppercase">Tecnologia de <span class="text-green-500">Elite</span></h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto italic">Segurança de nível corporativo simplificada para o seu WordPress.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <article class="pricing-card bg-gray-900 p-10 rounded-3xl border border-gray-700">
-                        <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-8">
-                            <i class="fas fa-fingerprint text-3xl text-blue-500"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">GeoShield PRO</h3>
-                        <p class="text-gray-400 leading-relaxed">Bloqueie países inteiros com um clique. Se você só vende para o Brasil, não há motivo para hackers da China acessarem sua tela de login.</p>
-                    </article>
-
-                    <article class="pricing-card bg-gray-900 p-10 rounded-3xl border border-gray-700">
-                        <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center mb-8">
-                            <i class="fas fa-user-secret text-3xl text-red-500"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Anti-Brute Force</h3>
-                        <p class="text-gray-400 leading-relaxed">Nossa IA local identifica tentativas repetitivas de login e bane o IP agressor instantaneamente, antes que ele acerte sua senha.</p>
-                    </article>
-
-                    <article class="pricing-card bg-gray-900 p-10 rounded-3xl border border-gray-700">
-                        <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-8">
-                            <i class="fas fa-bolt text-3xl text-green-500"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Zero Impacto</h3>
-                        <p class="text-gray-400 leading-relaxed">Código ultra otimizado. O WAC Shield roda antes do WordPress carregar suas funções pesadas, mantendo seu site rápido como um raio.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="precos" class="py-24 bg-gray-900 px-6 relative overflow-hidden">
-            <div class="container mx-auto relative z-10">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-black mb-4 uppercase italic">Invista em Tranquilidade</h2>
-                    <p class="text-gray-400 italic">Planos anuais sem pegadinhas. Blindagem definitiva para o seu negócio.</p>
-                </div>
+    <!-- Solution Section -->
+    <section id="solucao" class="py-24 lg:py-32 relative">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
                 
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="pricing-card bg-gray-800/50 backdrop-blur-sm p-10 rounded-3xl flex flex-col border border-gray-700">
-                        <h3 class="text-xl font-bold mb-2">Starter</h3>
-                        <p class="text-gray-500 text-sm mb-6">Proteção essencial para 1 site</p>
-                        <div class="mb-8">
-                            <span class="text-4xl font-black text-white">R$ 97</span>
-                            <span class="text-gray-500">/ano</span>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow text-gray-400">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Geo-Bloqueio Ativo</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Proteção de Login</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Atualizações v3.x</li>
-                        </ul>
-                        <a href="https://mpago.la/1u65wB6" class="w-full py-4 rounded-xl border-2 border-green-500 text-center font-bold hover:bg-green-500 transition uppercase">Selecionar</a>
-                    </div>
+                <!-- Content -->
+                <div>
+                    <span class="text-green-500 font-black text-sm tracking-widest mb-4 block">O PROBLEMA</span>
+                    <h2 class="text-4xl lg:text-5xl font-black mb-8 leading-tight">
+                        Seu site está sendo 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">atacado</span>
+                        agora mesmo.
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Milhares de robôs tentam invadir seu painel administrativo diariamente. 
+                        Isso não apenas rouba seus dados, mas <strong class="text-white">consome toda a memória do seu servidor</strong>.
+                    </p>
+                    
+                    <ul class="space-y-5 mb-10">
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-shield-halded text-green-500 text-xl mt-1"></i>
+                            <span class="text-gray-300">Elimine lentidão causada por tráfego de robôs</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-bolt text-green-500 text-xl mt-1"></i>
+                            <span class="text-gray-300">Dê um "ponto final" em ataques de Força Bruta</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-globe-americas text-green-500 text-xl mt-1"></i>
+                            <span class="text-gray-300">Impeça acessos de países sem interesse comercial</span>
+                        </li>
+                    </ul>
 
-                    <div class="pricing-card bg-gray-800 border-2 border-green-500 p-10 rounded-3xl flex flex-col relative scale-105 shadow-2xl">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Campeão de Vendas</div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Professional</h3>
-                        <p class="text-gray-500 text-sm mb-6">Blindagem para 5 sites</p>
-                        <div class="mb-8">
-                            <span class="text-5xl font-black text-green-500">R$ 247</span>
-                            <span class="text-gray-500">/ano</span>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow text-gray-200 font-medium">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> <strong>Licença para 5 sites</strong></li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Suporte Prioritário</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Painel de Inteligência</li>
-                        </ul>
-                        <a href="https://mpago.la/2uYbHr8" class="w-full py-4 rounded-xl bg-green-600 hover:bg-green-700 text-white text-center font-black transition shadow-lg shadow-green-900/40 uppercase">Assinar Agora</a>
-                    </div>
+                    <a href="#precos" class="btn-outline px-10 py-5 rounded-xl font-bold inline-flex items-center gap-3">
+                        <span>VER PROTEÇÃO EM AÇÃO</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
 
-                    <div class="pricing-card bg-gray-800/50 backdrop-blur-sm p-10 rounded-3xl flex flex-col border border-gray-700">
-                        <h3 class="text-xl font-bold mb-2">Agency</h3>
-                        <p class="text-gray-500 text-sm mb-6">Frotas até 50 sites</p>
-                        <div class="mb-8">
-                            <span class="text-4xl font-black text-white">R$ 497</span>
-                            <span class="text-gray-500">/ano</span>
+                <!-- Image/Graphic -->
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-green-500/30 to-blue-500/30 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                    <div class="relative glass-card rounded-3xl p-4">
+                        <img src="imagens/log.png" alt="Security Log" class="rounded-2xl w-full">
+                        
+                        <!-- Floating Stats -->
+                        <div class="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-2xl">
+                            <div class="flex items-center gap-4">
+                                <i class="fas fa-shield text-green-500 text-3xl"></i>
+                                <div>
+                                    <div class="text-2xl font-black text-white">1.337</div>
+                                    <div class="text-xs text-gray-500">Ataques bloqueados hoje</div>
+                                </div>
+                            </div>
                         </div>
-                        <ul class="space-y-4 mb-10 flex-grow text-gray-400">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> 50 Domínios Inclusos</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Gestão em Lote</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i> Suporte VIP WhatsApp</li>
-                        </ul>
-                        <a href="https://mpago.la/1UPoVKu" class="w-full py-4 rounded-xl border-2 border-green-500 text-center font-bold hover:bg-green-500 transition uppercase">Selecionar</a>
+                        
+                        <div class="absolute -top-6 -right-6 glass rounded-2xl p-4 shadow-2xl">
+                            <div class="flex items-center gap-4">
+                                <i class="fas fa-bolt text-yellow-500 text-3xl"></i>
+                                <div>
+                                    <div class="text-2xl font-black text-white">0.2ms</div>
+                                    <div class="text-xs text-gray-500">Tempo de resposta</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="faq" class="py-24 bg-gray-800 px-6">
-            <div class="container mx-auto max-w-3xl">
-                <h2 class="text-3xl font-black text-center mb-12 uppercase">Dúvidas Frequentes</h2>
-                <div class="space-y-4">
-                    <details class="group bg-gray-900 p-6 rounded-2xl border border-gray-700 cursor-pointer">
-                        <summary class="flex justify-between items-center font-bold text-lg list-none group-open:text-green-500">
-                            O plugin vai deixar meu site lento?
-                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <p class="mt-4 text-gray-400">Pelo contrário! Ao bloquear robôs pesados na porta de entrada, o WAC Shield alivia o processamento do seu servidor, podendo deixar o site até mais estável.</p>
-                    </details>
+    <!-- Features/Benefits -->
+    <section id="beneficios" class="py-24 lg:py-32 bg-gray-900/50">
+        <div class="container mx-auto px-4 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="text-green-500 font-black text-sm tracking-widest mb-4 block">TECNOLOGIA DE PONTA</span>
+                <h2 class="text-4xl lg:text-5xl font-black mb-8">
+                    Segurança de <span class="text-green-500">elite</span> para seu WordPress
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Blindagem corporativa simplificada. O que grandes empresas pagam fortune, 
+                    você tem por menos de R$ 1 por dia.
+                </p>
+            </div>
 
-                    <details class="group bg-gray-900 p-6 rounded-2xl border border-gray-700 cursor-pointer">
-                        <summary class="flex justify-between items-center font-bold text-lg list-none group-open:text-green-500">
-                            O pagamento é mensal?
-                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <p class="mt-4 text-gray-400">Não. O investimento é <strong>anual</strong>. Você paga uma vez por ano para garantir suporte, atualizações automáticas e a licença ativa.</p>
-                    </details>
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-fingerprint text-3xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">GeoShield PRO</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Bloqueie países inteiros com um clique. Se você só vende no Brasil, 
+                        não há motivo para hackers da China acessarem sua tela de login.
+                    </p>
+                    
+                    <!-- Feature Stats -->
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">185+ países bloqueáveis</div>
+                    </div>
+                </div>
 
-                    <details class="group bg-gray-900 p-6 rounded-2xl border border-gray-700 cursor-pointer">
-                        <summary class="flex justify-between items-center font-bold text-lg list-none group-open:text-green-500">
-                            Consigo desbloquear meu próprio IP?
-                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                        </summary>
-                        <p class="mt-4 text-gray-400">Sim! O plugin possui um sistema de "Whitelist" no painel. Além disso, administradores têm acesso prioritário que ignora as travas de segurança padrão.</p>
-                    </details>
+                <!-- Feature 2 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-3xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Anti-Brute Force IA</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        IA local identifica tentativas repetitivas de login e bane o IP 
+                        agressor instantaneamente, antes que ele acerte sua senha.
+                    </p>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">99.9% de precisão</div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-gauge-high text-3xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Zero Impacto</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Código ultra otimizado que roda antes do WordPress carregar funções pesadas, 
+                        mantendo seu site rápido como um raio.
+                    </p>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">0ms de latência adicional</div>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-3xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Proteção 24/7</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Monitoramento contínuo com atualizações automáticas de regras de segurança 
+                        contra novas ameaças.
+                    </p>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">Atualizações em tempo real</div>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-3xl text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Painel Inteligente</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Visualize todos os ataques bloqueados em tempo real com gráficos 
+                        detalhados e relatórios completos.
+                    </p>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">Métricas em tempo real</div>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-3xl text-indigo-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Suporte Prioritário</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Atendimento via WhatsApp com tempo de resposta médio de 5 minutos 
+                        para planos anuais.
+                    </p>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-800">
+                        <div class="text-sm text-gray-500">Tempo médio: 5min</div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-   <footer class="bg-gray-950 py-16 text-center border-t border-gray-800">
-  <div class="container mx-auto px-6">
-    
-    <img 
-      src="imagens/logo.png" 
-      alt="WAC Logo" 
-      class="h-12 w-12 mx-auto mb-6 grayscale opacity-60"
-    >
+    <!-- Pricing Section -->
+    <section id="precos" class="py-24 lg:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-green-500/5 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="text-green-500 font-black text-sm tracking-widest mb-4 block">INVESTIMENTO</span>
+                <h2 class="text-4xl lg:text-5xl font-black mb-8">
+                    Planos <span class="text-green-500">inteligentes</span> para cada necessidade
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Escolha o plano ideal para seu projeto. Todos incluem atualizações e suporte.
+                </p>
+            </div>
 
-    <p class="text-white font-bold text-lg mb-2">
-      © 2026 WAC Security Solutions — WAC Shield PRO
-    </p>
+            <!-- Pricing Cards -->
+            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Starter Plan -->
+                <div class="pricing-card p-8 rounded-3xl flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                    <p class="text-gray-500 mb-6">Para quem está começando</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-5xl font-black text-white">R$ 97</span>
+                        <span class="text-gray-500 ml-2">/ano</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">1 site</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Geo-Bloqueio ativo</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Proteção de login</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Atualizações v3.x</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://mpago.la/1u65wB6" class="btn-outline w-full py-4 rounded-xl text-center font-bold">
+                        COMEÇAR AGORA
+                    </a>
+                </div>
 
-   
-    <div class="flex justify-center items-center gap-6 text-gray-500 mb-8">
-      <a href="#" class="hover:text-green-500 transition duration-300">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="#" class="hover:text-green-500 transition duration-300">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="#" class="hover:text-green-500 transition duration-300">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </div>
+                <!-- Professional Plan (Featured) -->
+                <div class="pricing-card featured p-8 rounded-3xl flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Professional</h3>
+                    <p class="text-gray-500 mb-6">Para negócios em crescimento</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-6xl font-black text-green-500">R$ 247</span>
+                        <span class="text-gray-500 ml-2">/ano</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-300 font-bold">5 sites</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Tudo do Starter +</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Suporte prioritário</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Painel de inteligência</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Relatórios avançados</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://mpago.la/2uYbHr8" class="btn-primary w-full py-4 rounded-xl text-center font-bold">
+                        ASSINAR AGORA
+                    </a>
+                </div>
 
-    <div class="text-[10px] text-gray-600 uppercase tracking-wide flex justify-center items-center gap-3">
-      <a href="#" class="hover:text-gray-400 transition duration-300">
-        Termos de Uso
-      </a>
-      <span class="text-gray-700">|</span>
-      <a href="#" class="hover:text-gray-400 transition duration-300">
-        Política de Privacidade
-      </a>
-    </div>
+                <!-- Agency Plan -->
+                <div class="pricing-card p-8 rounded-3xl flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Agency</h3>
+                    <p class="text-gray-500 mb-6">Para agências e gestores</p>
+                    
+                    <div class="mb-8">
+                        <span class="text-5xl font-black text-white">R$ 497</span>
+                        <span class="text-gray-500 ml-2">/ano</span>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-300 font-bold">Até 50 sites</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Gestão em lote</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">API exclusiva</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Suporte VIP WhatsApp</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-400">Treinamento incluso</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="https://mpago.la/1UPoVKu" class="btn-outline w-full py-4 rounded-xl text-center font-bold">
+                        FALAR COM CONSULTOR
+                    </a>
+                </div>
+            </div>
 
-  </div>
-</footer>
+            <!-- Guarantee -->
+            <div class="mt-16 text-center">
+                <div class="inline-flex items-center gap-4 glass rounded-full px-8 py-4">
+                    <i class="fas fa-shield-heart text-3xl text-green-500"></i>
+                    <div class="text-left">
+                        <div class="font-bold">Garantia incondicional de 30 dias</div>
+                        <div class="text-sm text-gray-500">Se não gostar, devolvemos 100% do seu dinheiro</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <a href="https://wa.me/5511999402929?text=Olá!%20Tenho%20interesse%20no%20WAC%20Shield%20PRO." target="_blank" class="whatsapp-button transition-all hover:scale-110 active:scale-95 shadow-green-500/20 shadow-2xl">
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 lg:py-32 bg-gray-900/50">
+        <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-green-500 font-black text-sm tracking-widest mb-4 block">DÚVIDAS</span>
+                <h2 class="text-4xl lg:text-5xl font-black mb-8">
+                    Perguntas <span class="text-green-500">frequentes</span>
+                </h2>
+            </div>
+
+            <!-- FAQ Items -->
+            <div class="space-y-4">
+                
+                <details class="group glass-card rounded-2xl p-6 cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-bold list-none">
+                        O plugin vai deixar meu site lento?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Pelo contrário! Ao bloquear robôs pesados na porta de entrada, 
+                        o WAC Shield alivia o processamento do seu servidor, podendo deixar 
+                        o site até mais rápido e estável.
+                    </p>
+                </details>
+
+                <details class="group glass-card rounded-2xl p-6 cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-bold list-none">
+                        O pagamento é mensal?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Não. O investimento é <strong class="text-white">anual</strong>. 
+                        Você paga uma vez por ano para garantir suporte, atualizações automáticas 
+                        e a licença ativa.
+                    </p>
+                </details>
+
+                <details class="group glass-card rounded-2xl p-6 cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-bold list-none">
+                        Consigo desbloquear meu próprio IP?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Sim! O plugin possui um sistema de "Whitelist" no painel. Além disso, 
+                        administradores têm acesso prioritário que ignora as travas de segurança padrão.
+                    </p>
+                </details>
+
+                <details class="group glass-card rounded-2xl p-6 cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-bold list-none">
+                        Funciona em qualquer hospedagem?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Sim! O WAC Shield é compatível com 99.9% das hospedagens que rodam WordPress. 
+                        Testado nas principais plataformas como HostGator, Locaweb, KingHost, e painéis 
+                        como cPanel e Plesk.
+                    </p>
+                </details>
+
+                <details class="group glass-card rounded-2xl p-6 cursor-pointer">
+                    <summary class="flex justify-between items-center text-lg font-bold list-none">
+                        Como funciona a instalação?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Basta fazer upload do plugin, ativar e configurar em menos de 2 minutos. 
+                        Oferecemos tutorial em vídeo e suporte 24/7 para ajudar em qualquer dúvida.
+                    </p>
+                </details>
+            </div>
+
+            <!-- Still have questions -->
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 mb-4">Ainda tem dúvidas?</p>
+                <a href="https://wa.me/5511999402929" class="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold">
+                    <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                    <span>Falar com especialista</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 lg:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-500/20 via-transparent to-transparent"></div>
+        
+        <div class="container mx-auto px-4 lg:px-8 text-center relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl lg:text-5xl font-black mb-8">
+                    Pronto para <span class="text-green-500">proteger</span> seu negócio?
+                </h2>
+                <p class="text-xl text-gray-400 mb-12">
+                    Mais de 5.000 sites já confiam no WAC Shield. Junte-se a eles.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#precos" class="btn-primary px-12 py-6 rounded-2xl text-xl font-black">
+                        COMEÇAR AGORA
+                    </a>
+                    <a href="#beneficios" class="btn-outline px-12 py-6 rounded-2xl text-xl font-bold">
+                        VER RECURSOS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800">
+        <div class="container mx-auto px-4 lg:px-8 py-16">
+            
+            <div class="grid lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="imagens/logo.png" alt="WAC Shield" class="h-12 w-12 rounded-xl">
+                        <span class="text-2xl font-black">WAC<span class="text-green-500 ml-1">SHIELD</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Blindagem definitiva para WordPress. Proteção em tempo real com impacto zero na performance.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Produto</h4>
+                    <ul class="space-y-3 text-gray-500">
+                        <li><a href="#solucao" class="hover:text-green-500 transition">Solução</a></li>
+                        <li><a href="#beneficios" class="hover:text-green-500 transition">Recursos</a></li>
+                        <li><a href="#precos" class="hover:text-green-500 transition">Preços</a></li>
+                        <li><a href="#faq" class="hover:text-green-500 transition">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Legal</h4>
+                    <ul class="space-y-3 text-gray-500">
+                        <li><a href="#" class="hover:text-green-500 transition">Termos de Uso</a></li>
+                        <li><a href="#" class="hover:text-green-500 transition">Política de Privacidade</a></li>
+                        <li><a href="#" class="hover:text-green-500 transition">LGPD</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3 text-gray-500">
+                        <li class="flex items-center gap-3">
+                            <i class="fab fa-whatsapp text-green-500"></i>
+                            <span>(11) 99940-2929</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="far fa-envelope text-green-500"></i>
+                            <span>suporte@wacshield.com</span>
+                        </li>
+                    </ul>
+
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:text-green-500 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:text-green-500 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:text-green-500 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-600 text-sm">
+                <p>© 2026 WAC Security Solutions — WAC Shield PRO. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5511999402929?text=Olá!%20Tenho%20interesse%20no%20WAC%20Shield%20PRO." 
+       target="_blank" 
+       class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- JavaScript -->
     <script>
-        // Prevenir clique direito (Proteção de Copy)
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        
-        // Menu Mobile Toggle
-        const btnMobile = document.getElementById('btn-mobile');
-        const menuLinks = document.getElementById('menu-links');
-        btnMobile.addEventListener('click', () => {
-            menuLinks.classList.toggle('hidden');
-            menuLinks.classList.toggle('flex-col');
-            menuLinks.classList.toggle('absolute');
-            menuLinks.classList.toggle('top-full');
-            menuLinks.classList.toggle('left-0');
-            menuLinks.classList.toggle('w-full');
-            menuLinks.classList.toggle('bg-gray-900');
-            menuLinks.classList.toggle('p-6');
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            if (!menuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuOpen = true;
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+            }
         });
 
-        // Smooth Scroll
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuOpen = false;
+            });
+        });
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
+
+        // Navbar background change on scroll
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-gray-900/95', 'backdrop-blur-xl');
+            } else {
+                navbar.classList.remove('bg-gray-900/95', 'backdrop-blur-xl');
+            }
+        });
+
+        // Animate stats counter on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Prevent right click (optional - disable if not needed)
+        // document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 </html>
