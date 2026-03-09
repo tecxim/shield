@@ -206,31 +206,7 @@
             letter-spacing: 1px;
         }
 
-        /* WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            animation: pulse 2s infinite;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
-        }
-        
+               
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
@@ -586,11 +562,7 @@
                         <i class="fas fa-headset text-3xl text-indigo-500"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Suporte Prioritário</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Atendimento via WhatsApp com tempo de resposta médio de 5 minutos 
-                        para planos anuais.
-                    </p>
-                    
+                                        
                     <div class="mt-8 pt-8 border-t border-gray-800">
                         <div class="text-sm text-gray-500">Tempo médio: 5min</div>
                     </div>
@@ -816,16 +788,6 @@
                     </p>
                 </details>
             </div>
-
-            <!-- Still have questions -->
-            <div class="mt-12 text-center">
-                <p class="text-gray-500 mb-4">Ainda tem dúvidas?</p>
-                <a href="https://wa.me/5511999402929" class="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold">
-                    <i class="fab fa-whatsapp text-green-500 text-xl"></i>
-                    <span>Falar com especialista</span>
-                </a>
-            </div>
-        </div>
     </section>
 
     <!-- CTA Section -->
@@ -894,7 +856,6 @@
                     <h4 class="font-bold text-lg mb-6">Contato</h4>
                     <ul class="space-y-3 text-gray-500">
                         <li class="flex items-center gap-3">
-                            <i class="fab fa-whatsapp text-green-500"></i>
                             <span>(11) 99940-2929</span>
                         </li>
                         <li class="flex items-center gap-3">
@@ -923,13 +884,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/5511999402929?text=Olá!%20Tenho%20interesse%20no%20WAC%20Shield%20PRO." 
-       target="_blank" 
-       class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <!-- JavaScript -->
     <script>
