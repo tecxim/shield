@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /
-Sitemap: https://tecxim.github.io/shield/sitemap.xml
+Disallow: /
