@@ -964,8 +964,17 @@
 <!-- ========================
      WAC Chat Widget
 ======================== -->
-<div id="wac-chat-container" data-loja="loja"></div>
-<script src="https://wac-ai-site.suportewrsystems.workers.dev/wac-widget.js" async></script>
+<!-- Div do chat, com o cliente correto -->
+<div id="wac-chat-container" data-loja="tecxim.github.io/shield"></div>
+
+<!-- Script que injeta o widget -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const wacScript = document.createElement('script');
+    wacScript.src = "https://wac-ai-site.suportewrsystems.workers.dev/wac-widget.js";
+    document.body.appendChild(wacScript);
+  });
+</script>
 
 </body>
 </html>
