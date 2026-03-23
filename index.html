@@ -59,63 +59,6 @@
             background-clip: text !important;
         }
 
-        .chat-container {
-            flex: 1 !important;
-            overflow-y: auto !important;
-            scrollbar-width: thin !important;
-            scrollbar-color: var(--primary-300) var(--primary-50) !important;
-            background: rgba(255, 255, 255, 0.98) !important;
-            backdrop-filter: blur(12px) !important;
-            padding: 16px 12px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 12px !important;
-            border-radius: 0 0 20px 20px !important;
-        }
-
-        .chat-container::-webkit-scrollbar { width: 6px !important; }
-        .chat-container::-webkit-scrollbar-track { background: var(--primary-50) !important; border-radius: 10px !important; }
-        .chat-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary-300), var(--primary-400)) !important;
-            border-radius: 10px !important;
-            transition: all 0.3s ease !important;
-        }
-        .chat-container::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--primary-400), var(--primary-500)) !important;
-        }
-
-        .message-bubble {
-            max-width: 85% !important;
-            padding: 14px 18px !important;
-            border-radius: 22px !important;
-            line-height: 1.5 !important;
-            font-size: 0.95rem !important;
-            box-shadow: 0 4px 12px rgba(42, 123, 192, 0.1) !important;
-            border: 1px solid rgba(42, 123, 192, 0.2) !important;
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-            animation: fadeInUp 0.4s ease-out !important;
-            position: relative !important;
-        }
-
-        .message-bubble:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 20px rgba(42, 123, 192, 0.15) !important;
-        }
-
-        .message-bubble.user {
-            background: linear-gradient(145deg, var(--primary-700) 0%, var(--accent-700) 100%) !important;
-            color: white !important;
-            border: none !important;
-            border-bottom-right-radius: 4px !important;
-        }
-
-        .message-bubble.bot {
-            background: white !important;
-            color: var(--text-dark) !important;
-            border: 1px solid rgba(42, 123, 192, 0.2) !important;
-            border-bottom-left-radius: 4px !important;
-        }
-
         /* Modal Styles */
         .modal-overlay {
             position: fixed !important;
@@ -158,573 +101,6 @@
                 opacity: 1;
                 transform: scale(1);
             }
-        }
-
-        /* CHAT - SEMPRE MINIMIZADO POR PADRÃO */
-        .chat-wrapper {
-            position: fixed !important;
-            bottom: 30px !important;
-            right: 30px !important;
-            width: 65px !important;
-            height: 65px !important;
-            z-index: 100 !important;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-        }
-
-        /* Quando NÃO está minimizado (aberto) */
-        .chat-wrapper:not(.minimized) {
-            width: 400px !important;
-            height: 680px !important;
-        }
-
-        .chat-toggle {
-            display: flex !important;
-            background: linear-gradient(145deg, var(--primary-700) 0%, var(--accent-700) 100%) !important;
-            color: white !important;
-            border-radius: 50% !important;
-            width: 65px !important;
-            height: 65px !important;
-            box-shadow: 0 12px 30px -5px rgba(42, 123, 192, 0.4) !important;
-            cursor: pointer !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            z-index: 101 !important;
-            border: none !important;
-            transition: all 0.3s ease !important;
-            animation: float 3s ease-in-out infinite !important;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .chat-toggle:hover {
-            transform: scale(1.1) !important;
-            box-shadow: 0 15px 35px -5px rgba(42, 123, 192, 0.5) !important;
-        }
-
-        .chat-wrapper.minimized .chat-toggle {
-            display: flex !important;
-        }
-
-        .chat-wrapper.minimized .chat-main {
-            display: none !important;
-        }
-
-        .chat-wrapper:not(.minimized) .chat-toggle {
-            display: none !important;
-        }
-
-        .chat-main {
-            background: white !important;
-            backdrop-filter: blur(20px) !important;
-            border-radius: 28px !important;
-            box-shadow: 0 25px 50px -12px rgba(42, 123, 192, 0.2) !important;
-            overflow: hidden !important;
-            display: none !important;
-            flex-direction: column !important;
-            height: 720px !important;
-            width: 400px !important;
-            position: absolute !important;
-            top: 0 !important;
-            right: 0 !important;
-            animation: slideInRight 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1) !important;
-            border: 1px solid rgba(42, 123, 192, 0.2) !important;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .chat-wrapper:not(.minimized) .chat-main {
-            display: flex !important;
-        }
-
-        .chat-header {
-            background: linear-gradient(145deg, var(--primary-50) 0%, var(--primary-100) 100%) !important;
-            color: var(--text-dark) !important;
-            padding: 16px 18px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            cursor: pointer !important;
-            border-bottom: 1px solid rgba(42, 123, 192, 0.15) !important;
-            font-weight: 600 !important;
-            letter-spacing: -0.3px !important;
-            transition: all 0.3s ease !important;
-            border-radius: 20px 20px 0 0 !important;
-        }
-
-        .chat-header:hover {
-            background: linear-gradient(145deg, #ffffff 0%, var(--primary-50) 100%) !important;
-        }
-
-        .chat-header h3 {
-            background: linear-gradient(145deg, var(--primary-700), var(--accent-700)) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-            font-size: 1.2rem !important;
-        }
-
-        .suggestions-container {
-            padding: 14px 14px !important;
-            background: rgba(240, 247, 255, 0.8) !important;
-            border-top: 1px solid rgba(42, 123, 192, 0.15) !important;
-            border-bottom: 1px solid rgba(42, 123, 192, 0.15) !important;
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-        }
-
-        .suggestions-container button {
-            font-size: 0.9rem !important;
-            background: rgba(240, 247, 255, 0.9) !important;
-            border: 1px solid rgba(42, 123, 192, 0.25) !important;
-            border-radius: 40px !important;
-            padding: 10px 18px !important;
-            color: var(--text-dark) !important;
-            transition: all 0.3s ease !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 6px !important;
-            font-weight: 500 !important;
-            letter-spacing: -0.2px !important;
-            box-shadow: 0 2px 6px rgba(42, 123, 192, 0.1) !important;
-            cursor: pointer !important;
-        }
-
-        .suggestions-container button:hover {
-            background: white !important;
-            border-color: var(--accent-700) !important;
-            color: var(--text-dark) !important;
-            box-shadow: 0 8px 16px -8px rgba(42, 123, 192, 0.2) !important;
-            transform: translateY(-2px) !important;
-        }
-
-        .suggestions-container button:active {
-            transform: translateY(0px) !important;
-        }
-
-        .suggestions-container button i {
-            color: var(--accent-700) !important;
-            font-size: 1rem !important;
-        }
-
-        #prompt {
-            background: rgba(240, 247, 255, 0.95) !important;
-            border: 1px solid rgba(42, 123, 192, 0.25) !important;
-            color: var(--text-dark) !important;
-            padding: 16px 18px !important;
-            border-radius: 40px !important;
-            width: 100% !important;
-            font-size: 0.95rem !important;
-            box-shadow: 0 2px 8px rgba(42, 123, 192, 0.1) !important;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1) !important;
-            border: none !important;
-        }
-
-        #prompt:focus {
-            outline: none !important;
-            border-color: var(--accent-700) !important;
-            box-shadow: 0 0 0 3px rgba(42, 123, 192, 0.2) !important;
-            background: white !important;
-            transform: translateY(-1px) !important;
-        }
-
-        #prompt::placeholder {
-            color: var(--primary-400) !important;
-            font-weight: 400 !important;
-        }
-
-        #btn {
-            background: linear-gradient(145deg, var(--primary-700) 0%, var(--accent-700) 100%) !important;
-            color: white !important;
-            border-radius: 50% !important;
-            width: 54px !important;
-            height: 54px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            border: none !important;
-            cursor: pointer !important;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1) !important;
-            margin-left: 8px !important;
-            box-shadow: 0 8px 18px -6px rgba(42, 123, 192, 0.3) !important;
-        }
-
-        #btn:hover {
-            transform: scale(1.1) !important;
-            box-shadow: 0 12px 24px -8px rgba(42, 123, 192, 0.4) !important;
-        }
-
-        #btn:active {
-            transform: scale(0.95) !important;
-        }
-
-        #btn svg {
-            width: 24px !important;
-            height: 24px !important;
-            filter: drop-shadow(0 2px 4px rgba(42, 123, 192, 0.2)) !important;
-            transition: transform 0.2s ease !important;
-        }
-
-        #btn:hover svg {
-            transform: translateX(2px) !important;
-        }
-
-        @media (max-width: 768px) {
-            .chat-wrapper {
-                bottom: 20px !important;
-                right: 20px !important;
-            }
-
-            .chat-wrapper:not(.minimized) {
-                width: 100% !important;
-                height: 92vh !important;
-                right: 0 !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                top: auto !important;
-            }
-
-            .chat-wrapper:not(.minimized) .chat-main {
-                width: 100% !important;
-                height: 92vh !important;
-                border-radius: 30px 30px 0 0 !important;
-                display: flex !important;
-                animation: slideUp 0.4s ease-out !important;
-            }
-
-            @keyframes slideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .suggestions-container button {
-                padding: 12px 16px !important;
-                font-size: 14px !important;
-            }
-
-            .chat-header {
-                padding: 22px 18px !important;
-            }
-
-            #prompt {
-                padding: 18px !important;
-                font-size: 1rem !important;
-            }
-
-            #btn {
-                width: 58px !important;
-                height: 58px !important;
-            }
-
-            /* Ajuste para o chat-main no mobile */
-            .chat-main {
-                padding-bottom: 20px !important;
-            }
-        }
-
-        .pricing-card {
-            background: white !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(42, 123, 192, 0.15) !important;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.4, 1) !important;
-            cursor: pointer !important;
-            position: relative !important;
-            border-radius: 24px !important;
-            padding: 2rem !important;
-            box-shadow: 0 12px 30px -10px rgba(42, 123, 192, 0.15) !important;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-8px) !important;
-            border-color: var(--accent-700) !important;
-            box-shadow: 0 25px 50px -20px rgba(42, 123, 192, 0.25) !important;
-        }
-
-        .pricing-card.popular {
-            border: 2px solid var(--accent-700) !important;
-            transform: scale(1.03) !important;
-            box-shadow: 0 30px 60px -20px rgba(42, 123, 192, 0.3) !important;
-        }
-
-        .pricing-card.popular:hover {
-            transform: scale(1.04) translateY(-5px) !important;
-        }
-
-        .popular-badge {
-            position: absolute !important;
-            top: -12px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            background: linear-gradient(145deg, var(--primary-700) 0%, var(--accent-700) 100%) !important;
-            color: white !important;
-            padding: 6px 24px !important;
-            border-radius: 30px !important;
-            font-size: 0.8rem !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1.5px !important;
-            white-space: nowrap !important;
-            box-shadow: 0 8px 16px -6px rgba(42, 123, 192, 0.3) !important;
-            border: 1px solid rgba(255,255,255,0.3) !important;
-            animation: badgePulse 2s infinite !important;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% {
-                box-shadow: 0 8px 16px -6px rgba(42, 123, 192, 0.3);
-            }
-            50% {
-                box-shadow: 0 8px 20px -4px rgba(42, 123, 192, 0.4);
-            }
-        }
-
-        .nav-glass {
-            background: rgba(255, 255, 255, 0.9) !important;
-            backdrop-filter: blur(12px) !important;
-            border-bottom: 1px solid rgba(42, 123, 192, 0.15) !important;
-            box-shadow: 0 4px 20px rgba(42, 123, 192, 0.05) !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .benefit-item {
-            display: flex !important;
-            align-items: flex-start !important;
-            gap: 0.75rem !important;
-            margin-bottom: 0.75rem !important;
-            text-align: left !important;
-            color: var(--primary-600) !important;
-            font-size: 0.875rem !important;
-            line-height: 1.25rem !important;
-            transition: all 0.3s ease !important;
-            padding: 8px !important;
-            border-radius: 12px !important;
-        }
-
-        .benefit-item:hover {
-            transform: translateX(4px) !important;
-            background: rgba(42, 123, 192, 0.05) !important;
-        }
-
-        .benefit-item svg {
-            width: 1.25rem !important;
-            height: 1.25rem !important;
-            flex-shrink: 0 !important;
-            color: var(--accent-700) !important;
-            margin-top: 2px !important;
-            filter: drop-shadow(0 2px 4px rgba(42, 123, 192, 0.2)) !important;
-            transition: all 0.2s ease !important;
-        }
-
-        .benefit-item:hover svg {
-            transform: scale(1.1) !important;
-            color: var(--primary-700) !important;
-        }
-
-        /* Animações Globais */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scalePulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.03);
-            }
-        }
-
-        /* Classes de animação para uso */
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out !important;
-        }
-
-        .animate-fadeInDown {
-            animation: fadeInDown 0.6s ease-out !important;
-        }
-
-        .animate-fadeInLeft {
-            animation: fadeInLeft 0.6s ease-out !important;
-        }
-
-        .animate-fadeInRight {
-            animation: fadeInRight 0.6s ease-out !important;
-        }
-
-        .animate-scalePulse {
-            animation: scalePulse 2s ease-in-out infinite !important;
-        }
-
-        /* Efeitos de hover para links */
-        a {
-            transition: all 0.3s ease !important;
-        }
-
-        a:hover {
-            transform: translateY(-1px) !important;
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth !important;
-        }
-
-        /* Melhorias de foco para acessibilidade */
-        *:focus-visible {
-            outline: 2px solid var(--accent-700) !important;
-            outline-offset: 2px !important;
-        }
-
-        /* Loading animation para o chat */
-        @keyframes typingPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        .typing-indicator {
-            display: inline-flex !important;
-            gap: 4px !important;
-            padding: 8px 12px !important;
-        }
-
-        .typing-indicator span {
-            width: 8px !important;
-            height: 8px !important;
-            border-radius: 50% !important;
-            background: var(--accent-700) !important;
-            animation: typingPulse 1.4s infinite !important;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s !important;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s !important;
-        }
-
-        /* Avatar no header do chat */
-        .chat-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            padding: 2px;
-            box-shadow: 0 4px 12px rgba(42, 123, 192, 0.2);
-            border: 2px solid white;
-            transition: all 0.3s ease;
-        }
-
-        .chat-avatar:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(42, 123, 192, 0.3);
-        }
-
-        /* Efeito de brilho sutil nos cards */
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(145deg, rgba(42, 123, 192, 0.1), rgba(90, 155, 213, 0.1));
-            border-radius: 26px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .pricing-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Efeito de destaque nos benefícios */
-        .benefit-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 0;
-            background: var(--accent-700);
-            border-radius: 2px;
-            transition: height 0.2s ease;
-        }
-
-        .benefit-item:hover::before {
-            height: 24px;
-        }
-
-        /* Animação de giro para o quadrado */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .spinning-square {
-            animation: spin 20s linear infinite;
         }
 
         /* Estilos para a seção de segurança */
@@ -891,6 +267,156 @@
             background: linear-gradient(135deg, var(--security-green), var(--accent-700));
             border-radius: 5px;
         }
+
+        /* Navigation */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(12px) !important;
+            border-bottom: 1px solid rgba(42, 123, 192, 0.15) !important;
+            box-shadow: 0 4px 20px rgba(42, 123, 192, 0.05) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Animações Globais */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scalePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        /* Classes de animação para uso */
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out !important;
+        }
+
+        .animate-fadeInDown {
+            animation: fadeInDown 0.6s ease-out !important;
+        }
+
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.6s ease-out !important;
+        }
+
+        .animate-fadeInRight {
+            animation: fadeInRight 0.6s ease-out !important;
+        }
+
+        .animate-scalePulse {
+            animation: scalePulse 2s ease-in-out infinite !important;
+        }
+
+        /* Efeitos de hover para links */
+        a {
+            transition: all 0.3s ease !important;
+        }
+
+        a:hover {
+            transform: translateY(-1px) !important;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth !important;
+        }
+
+        /* Melhorias de foco para acessibilidade */
+        *:focus-visible {
+            outline: 2px solid var(--accent-700) !important;
+            outline-offset: 2px !important;
+        }
+
+        /* Efeito de brilho sutil nos cards */
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(145deg, rgba(46, 204, 113, 0.1), rgba(90, 155, 213, 0.1));
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Efeito de destaque nos benefícios */
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: var(--accent-700);
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+
+        .benefit-item:hover::before {
+            height: 24px;
+        }
+
+        /* Animação de giro para o quadrado */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spinning-square {
+            animation: spin 20s linear infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -908,62 +434,6 @@
             </div>
             <a href="#" id="modalLinkPagamento" target="_blank" class="gradient-bg text-white font-bold py-4 rounded-xl w-full block hover:opacity-90 transition-all shadow-lg shadow-[#2a7bc0]/20">FINALIZAR PAGAMENTO</a>
             <button onclick="fecharModal()" class="mt-4 text-[#5a6f94] hover:text-[#1a2b5c] text-sm">Cancelar</button>
-        </div>
-    </div>
-
-    <!-- Chat Minimizável -->
-    <div class="chat-wrapper" id="chatWrapper">
-        <div class="chat-toggle" onclick="toggleChat()">
-            <img src="https://tecxim.github.io/shield/imagens/avatar.jpg" class="w-8 h-8 rounded-full">
-        </div>
-
-        <div class="chat-main">
-            <!-- Header com avatar -->
-            <div class="chat-header" onclick="toggleChat()">
-                <div class="flex items-center gap-3">
-                    <img src="https://tecxim.github.io/shield/imagens/avatar.jpg" class="chat-avatar">
-                    <h3 class="font-semibold tracking-wider">WAC Assist</h3>
-                </div>
-                <span class="opacity-70 text-xl">−</span>
-            </div>
-
-            <!-- Área de mensagens -->
-            <div id="chat-box" class="chat-container"></div>
-
-            <!-- Sugestões -->
-            <div class="suggestions-container px-4 py-2">
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <button onclick="sugestaoClick('contato')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-4 py-2.5 text-[#1a2b5c] transition-all flex items-center gap-1.5 shadow-sm animate-fadeInUp">
-                        <span>👤</span> Falar com Especialista
-                    </button>
-                    <button onclick="sugestaoClick('prazos')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>📅</span> Prazos
-                    </button>
-                    <button onclick="sugestaoClick('precos')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>💰</span> Preços
-                    </button>
-                    <button onclick="sugestaoClick('comparar')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>⚖️</span> Comparar
-                    </button>
-                    <button onclick="sugestaoClick('beneficios')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>✨</span> Benefícios
-                    </button>
-                    <button onclick="sugestaoClick('suporte')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>📞</span> Suporte
-                    </button>
-                    <button onclick="sugestaoClick('horario')" class="text-xs bg-[#f0f7ff] hover:bg-[#e8f0ff] border border-[#cddbef] rounded-full px-3 py-1.5 text-[#1a2b5c] transition-all flex items-center gap-1 animate-fadeInUp">
-                        <span>⏰</span> Horário
-                    </button>
-                </div>
-            </div>
-
-            <!-- Input -->
-            <div class="border-t border-[#cddbef] p-3 bg-[#f8faff]">
-                <div class="flex gap-2">
-                    <input type="text" id="prompt" class="flex-1 bg-[#f0f7ff] border-none rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[#2a7bc0] text-[#1a2b5c]" placeholder="Digite sua dúvida..." onkeypress="if(event.key === 'Enter') askAI()">
-                    <button onclick="askAI()" id="btn" class="gradient-bg w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#2a7bc0]/30">➤</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1449,6 +919,7 @@
                     </p>
                 </details>
             </div>
+        </div>
     </section>
 
     <!-- CTA Section -->
@@ -1546,242 +1017,18 @@
         </div>
     </footer>
 
+    <!-- Novo Widget -->
+    <div id="wac-chat-container" data-loja="tecxim.github.io"></div>
+    <script src="https://wac-ai-site.suportewrsystems.workers.dev"></script>
+
+    <!-- Scripts básicos (sem lógica do widget antigo) -->
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Configuração
-        let chatHistory = [];
-        let clienteId = window.location.hostname.replace('www.', '');
-        let sessionId = localStorage.getItem('wac_session') || crypto.randomUUID();
-        localStorage.setItem('wac_session', sessionId);
-
-        // No window.onload ou depois de carregar a mensagem inicial
-        window.onload = () => {
-            document.getElementById('chatWrapper').classList.add('minimized');
-            carregarMensagemInicial();
-        };
-
-        // ===== SANITIZAÇÃO DE INPUT (ANTI-XSS) =====
-        function sanitizeInput(input) {
-            if (typeof input !== 'string') return '';
-            const maxLength = 5000;
-            if (input.length > maxLength) {
-                input = input.substring(0, maxLength) + '... [truncado]';
-            }
-            return input
-                .replace(/<script/gi, '&lt;script')
-                .replace(/<iframe/gi, '&lt;iframe')
-                .replace(/javascript:/gi, 'javascript&#58;')
-                .replace(/onerror/gi, 'onerror&#58;')
-                .replace(/onload/gi, 'onload&#58;')
-                .replace(/onclick/gi, 'onclick&#58;')
-                .replace(/alert\(/gi, 'alert&#40;')
-                .replace(/prompt\(/gi, 'prompt&#40;')
-                .replace(/confirm\(/gi, 'confirm&#40;')
-                .replace(/eval\(/gi, 'eval&#40;')
-                .replace(/document\./gi, 'document&#46;')
-                .replace(/window\./gi, 'window&#46;');
-        }
-
-        // Função Estática: Inicia o chat instantaneamente
-        function carregarMensagemInicial() {
-            const mensagemBoasVindas = 'Olá! Sou a sua assistente da **WAC Shield Solutions**. Como posso te ajudar hoje?';
-            addMessage(mensagemBoasVindas, 'bot');
-        }
-
-        function toggleChat() {
-            document.getElementById('chatWrapper').classList.toggle('minimized');
-        }
-
+        // Função para fechar o modal de pagamento
         function fecharModal() {
             document.getElementById('paymentModal').style.display = 'none';
         }
 
-        // Função para processar marcadores
-        function processarMarcadores(texto) {
-            if (!texto) return texto;
-            texto = texto.replace(/\[BOTAO_WHATSAPP:([^\]]+)\]/g, (match, link) => {
-                if (!/^https:\/\/wa\.me\/\d+/.test(link)) {
-                    return "[Link de WhatsApp inválido]";
-                }
-                return `
-                    <a href="${link}" target="_blank"
-                       class="inline-block bg-[#25d366] hover:bg-[#128C7E] text-white
-                              px-4 py-2 rounded-lg text-sm font-bold mt-2 transition-all shadow-lg">
-                        📱 Falar no WhatsApp
-                    </a>
-                `;
-            });
-            texto = texto.replace(/\[LINK_PAGAMENTO_([A-Z_]+)\]/g, (match, plano) => {
-                const planoUpper = plano.trim().toUpperCase();
-                const links = {
-                    'LITE': 'https://mpago.la/1Wy3BQp',
-                    'PRO': 'https://mpago.la/1u65wB6',
-                    'ENTERPRISE': 'https://mpago.la/2cou3uq'
-                };
-                const link = links[planoUpper];
-                if (!link) return `<div class="text-red-400 text-sm mt-1">Plano não encontrado</div>`;
-                return `
-                    <a href="${link}" target="_blank"
-                       class="inline-block gradient-bg text-white px-4 py-2 rounded-lg
-                              text-sm font-bold mt-2 hover:opacity-90 transition-all shadow-lg">
-                        💳 Assinar ${planoUpper}
-                    </a>
-                `;
-            });
-            return texto;
-        }
-
-        // Adiciona mensagem ao chat
-        function addMessage(texto, tipo) {
-            const chatBox = document.getElementById('chat-box');
-            if (!chatBox) return;
-
-            const div = document.createElement('div');
-            div.className = `flex ${tipo === 'user' ? 'justify-end' : 'justify-start'} mb-4`;
-
-            const textoProcessado = processarMarcadores(texto);
-
-            div.innerHTML = `
-                <div class="message-bubble ${tipo === 'user' ? 'user' : 'bot'}">
-                    ${textoProcessado}
-                </div>
-            `;
-
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        // Mostra indicador de digitação
-        function showTyping() {
-            const box = document.getElementById('chat-box');
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'typing';
-            typingDiv.className = 'flex mb-4 items-start';
-            typingDiv.innerHTML = `
-                <div class="bot p-3 rounded-xl text-[#5a6f94] italic animate-pulse border border-[#cddbef]">
-                    <div class="typing-indicator">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            `;
-            box.appendChild(typingDiv);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        // Remove indicador de digitação
-        function removeTyping() {
-            document.getElementById('typing')?.remove();
-        }
-
-        // Função principal de IA
-        (() => {
-            let aguardandoIA = false;
-            const askAIInternal = async () => {
-                const input = document.getElementById('prompt');
-                const msgRaw = input.value.trim();
-                const msg = sanitizeInput(msgRaw);
-
-                if (!msg || aguardandoIA) return;
-                aguardandoIA = true;
-
-                addMessage(msg, 'user');
-                input.value = '';
-                showTyping();
-
-                try {
-                    const response = await fetch('https://wac-ai-backend.suportewrsystems.workers.dev/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            message: msg,
-                            clienteId: window.location.hostname.replace('www.', ''),
-                            history: chatHistory
-                        })
-                    });
-
-                    const data = await response.json();
-                    removeTyping();
-
-                    if (data.resposta) {
-                        addMessage(data.resposta, 'bot');
-                        if (data.history) {
-                            chatHistory = data.history;
-                        }
-                    }
-                } catch (error) {
-                    removeTyping();
-                    addMessage('Erro de conexão. Tente novamente.', 'bot');
-                } finally {
-                    aguardandoIA = false;
-                }
-            };
-
-            const askAIProxy = new Proxy(askAIInternal, {
-                set: () => false,
-                deleteProperty: () => false
-            });
-
-            Object.defineProperty(window, 'askAI', {
-                value: askAIProxy,
-                writable: false,
-                configurable: false,
-                enumerable: true
-            });
-        })();
-
-        // Função para sugestões
-        function sugestaoClick(tipo) {
-            const input = document.getElementById('prompt');
-            const perguntas = {
-                'prazos': 'Qual o prazo para instalação do agente?',
-                'precos': 'Quais os preços dos planos?',
-                'comparar': 'Comparar planos',
-                'beneficios': 'Benefícios de cada plano',
-                'suporte': 'Falar com suporte',
-                'horario': 'Horário de funcionamento',
-                'contato': 'Quero que um especialista entre em contato comigo'
-            };
-            input.value = perguntas[tipo] || tipo;
-            askAI();
-        }
-
-        // Função para alternar a política de privacidade
-        function togglePrivacy() {
-            const politica = document.getElementById('politica-privacidade');
-            politica.classList.toggle('hidden');
-            politica.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // ========================
-        // Mobile Menu Toggle
-        // ========================
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        let menuOpen = false;
-
-        if (menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                menuOpen = !menuOpen;
-            });
-        }
-
-        // Close mobile menu when clicking on a link
-        if (document.querySelectorAll('#mobileMenu a')) {
-            document.querySelectorAll('#mobileMenu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mobileMenu) mobileMenu.classList.add('hidden');
-                    menuOpen = false;
-                });
-            });
-        }
-
-        // ========================
-        // Smooth scroll for anchor links
-        // ========================
+        // Smooth scroll para âncoras
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1795,9 +1042,7 @@
             });
         });
 
-        // ========================
-        // Navbar background change on scroll
-        // ========================
+        // Efeito de navbar ao rolar
         const navbar = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
@@ -1806,29 +1051,6 @@
                 if (navbar) navbar.classList.remove('bg-gray-900/95', 'backdrop-blur-xl');
             }
         });
-
-        // ========================
-        // Animate stats counter on scroll
-        // ========================
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-up');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.stat-item').forEach(item => {
-            observer.observe(item);
-        });
     </script>
-    <div id="wac-chat-container" data-loja="tecxim.github.io"></div>
-<script src="https://wac-ai-site.suportewrsystems.workers.dev"></script>
-
 </body>
 </html>
