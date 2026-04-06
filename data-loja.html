@@ -298,5 +298,35 @@
         // Inicializar
         renderizarDominios();
     </script>
+
+
+    <script>
+// Bloqueia clique direito
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
+// Bloqueia teclas de inspeção
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) ||
+        (e.ctrlKey && e.key === 'U') ||
+        (e.ctrlKey && e.key === 'S')) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Detecta DevTools
+setInterval(function() {
+    const start = performance.now();
+    debugger;
+    const end = performance.now();
+    if (end - start > 100) {
+        document.body.innerHTML = '<div style="text-align:center;padding:50px;font-family:sans-serif;"><h1>🔒 Acesso Negado</h1><p>Ferramentas de desenvolvedor não são permitidas.</p></div>';
+    }
+}, 1000);
+</script>
 </body>
 </html>
