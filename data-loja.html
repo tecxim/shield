@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAC Shield - Gerador de Script</title>
+    <title>WAC Shield - Gerador de Scripts Múltiplos</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -34,11 +34,16 @@
 
         .header h1 {
             color: #1a1a2e;
-            font-size: 24px;
+            font-size: 28px;
         }
 
         .header h1 span {
             color: #4e86da;
+        }
+
+        .header p {
+            color: #666;
+            margin-top: 8px;
         }
 
         .card {
@@ -57,55 +62,96 @@
             border-bottom: 2px solid #f0f2f5;
         }
 
-        .input-dominio {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            margin-bottom: 16px;
+        .dominio-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .input-dominio:focus {
+        .dominio-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .dominio-input:focus {
             outline: none;
             border-color: #4e86da;
         }
 
-        .btn-gerar {
+        .btn-remover {
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-remover:hover {
+            background: #c82333;
+        }
+
+        .btn-adicionar {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .btn-adicionar:hover {
+            background: #218838;
+        }
+
+        .btn-gerar-todos {
             width: 100%;
             background: #4e86da;
             color: white;
-            padding: 12px 24px;
+            padding: 14px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
+            margin-top: 16px;
         }
 
-        .btn-gerar:hover {
+        .btn-gerar-todos:hover {
             background: #3a6db8;
         }
 
-        .script-box {
-            margin-top: 24px;
-            background: #1e1e1e;
-            border-radius: 8px;
+        .resultado-item {
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
             padding: 16px;
-            display: none;
+            margin-bottom: 16px;
+            background: #fafafa;
         }
 
-        .script-header {
+        .resultado-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
             margin-bottom: 12px;
         }
 
-        .script-header span {
-            color: #aaa;
-            font-size: 12px;
+        .resultado-dominio {
+            font-weight: 600;
+            color: #1a1a2e;
+            font-size: 16px;
+            font-family: monospace;
         }
 
         .btn-copiar {
@@ -118,20 +164,22 @@
             font-size: 12px;
         }
 
-        .btn-copiar:hover {
-            background: #218838;
-        }
-
         .script-code {
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: #d4d4d4;
-            background: #2d2d2d;
+            background: #1e1e1e;
             padding: 12px;
             border-radius: 6px;
             overflow-x: auto;
             white-space: pre-wrap;
             word-break: break-all;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
         }
 
         footer {
@@ -145,21 +193,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>WAC <span>Shield</span> | Gerador de Script</h1>
+            <h1>WAC <span>Shield</span></h1>
+            <p>Gerador de Scripts para Múltiplos Domínios</p>
         </div>
 
         <div class="card">
-            <h2>📋 Gerar Widget do Chat</h2>
-            <input type="text" id="dominioInput" class="input-dominio" placeholder="Digite seu domínio (ex: meusite.com.br)">
-            <button class="btn-gerar" onclick="gerarScript()">Gerar Script</button>
-            
-            <div id="scriptBox" class="script-box">
-                <div class="script-header">
-                    <span>📋 Código do Widget - Copie e cole no seu site</span>
-                    <button class="btn-copiar" onclick="copiarScript()">Copiar</button>
-                </div>
-                <div id="scriptCode" class="script-code"></div>
-            </div>
+            <h2>📝 Domínios</h2>
+            <div id="dominiosList"></div>
+            <button class="btn-adicionar" onclick="adicionarDominio()">+ Adicionar outro domínio</button>
+            <button class="btn-gerar-todos" onclick="gerarTodosScripts()">🚀 Gerar Scripts para Todos</button>
+        </div>
+
+        <div class="card">
+            <h2>📋 Scripts Gerados</h2>
+            <div id="resultados"></div>
         </div>
 
         <footer>
@@ -168,31 +215,77 @@
     </div>
 
     <script>
-        function gerarScript() {
-            const dominio = document.getElementById('dominioInput').value.trim().toLowerCase();
-            
-            if (!dominio) {
-                alert('Digite um domínio válido');
-                return;
-            }
+        let dominios = ['', '', '', '', '', '', '', '', '', ''];
 
-            // Limpar URL
-            let dominioLimpo = dominio.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+        function renderizarDominios() {
+            const container = document.getElementById('dominiosList');
+            container.innerHTML = '';
             
-            const scriptHtml = `<div id="wac-chat-container" data-loja="${dominioLimpo}"></div>\n<script src="https://wacshield.com/wac-widget.js"><\/script>`;
-            
-            document.getElementById('scriptCode').innerHTML = escapeHtml(scriptHtml);
-            document.getElementById('scriptBox').style.display = 'block';
+            dominios.forEach((dom, index) => {
+                const row = document.createElement('div');
+                row.className = 'dominio-row';
+                row.innerHTML = `
+                    <input type="text" class="dominio-input" placeholder="Ex: meusite.com.br" value="${escapeHtml(dom)}" onchange="atualizarDominio(${index}, this.value)">
+                    <button class="btn-remover" onclick="removerDominio(${index})" ${index < 1 ? 'disabled style="opacity:0.5;"' : ''}>Remover</button>
+                `;
+                container.appendChild(row);
+            });
         }
 
-        async function copiarScript() {
-            const scriptCode = document.getElementById('scriptCode').innerText;
+        function atualizarDominio(index, valor) {
+            let dominio = valor.trim().toLowerCase();
+            dominio = dominio.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+            dominios[index] = dominio;
+        }
+
+        function adicionarDominio() {
+            dominios.push('');
+            renderizarDominios();
+        }
+
+        function removerDominio(index) {
+            if (dominios.length > 1) {
+                dominios.splice(index, 1);
+                renderizarDominios();
+            }
+        }
+
+        function gerarTodosScripts() {
+            const resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = '';
             
+            let temDominio = false;
+            
+            for (let i = 0; i < dominios.length; i++) {
+                const dominio = dominios[i];
+                if (dominio && dominio.length > 0) {
+                    temDominio = true;
+                    const scriptHtml = `<div id="wac-chat-container" data-loja="${dominio}"></div>\n<script src="https://wacshield.com/wac-widget.js"><\/script>`;
+                    
+                    const resultadoItem = document.createElement('div');
+                    resultadoItem.className = 'resultado-item';
+                    resultadoItem.innerHTML = `
+                        <div class="resultado-header">
+                            <span class="resultado-dominio">📁 ${escapeHtml(dominio)}</span>
+                            <button class="btn-copiar" onclick="copiarScript('${escapeHtml(scriptHtml)}')">Copiar</button>
+                        </div>
+                        <div class="script-code">${escapeHtml(scriptHtml)}</div>
+                    `;
+                    resultadosDiv.appendChild(resultadoItem);
+                }
+            }
+            
+            if (!temDominio) {
+                resultadosDiv.innerHTML = '<div class="loading">⚠️ Nenhum domínio informado. Preencha pelo menos um domínio.</div>';
+            }
+        }
+
+        async function copiarScript(script) {
             try {
-                await navigator.clipboard.writeText(scriptCode);
+                await navigator.clipboard.writeText(script);
                 alert('✅ Script copiado para a área de transferência!');
             } catch (err) {
-                alert('❌ Erro ao copiar. Copie manualmente.');
+                alert('❌ Copie manualmente: ' + script);
             }
         }
 
@@ -201,6 +294,9 @@
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Inicializar
+        renderizarDominios();
     </script>
 </body>
 </html>
