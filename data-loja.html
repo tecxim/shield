@@ -289,16 +289,13 @@
         }
 
         async function copiarScript(script) {
-            // Remove as tags <script> e 
-            let textoParaCopiar = script.replace(/<script>/g, '').replace(/<\/script>/g, '');
-            
+            // Não precisa remover nada, o script já está correto
             try {
-                await navigator.clipboard.writeText(textoParaCopiar);
-                alert('✅ Script copiado para a área de transferência!');
+                await navigator.clipboard.writeText(script);
+                alert('✅ Script copiado!');
             } catch (err) {
-                // Fallback para navegadores antigos
                 const textarea = document.createElement('textarea');
-                textarea.value = textoParaCopiar;
+                textarea.value = script;
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
