@@ -267,7 +267,8 @@
                     resultadoItem.innerHTML = `
                         <div class="resultado-header">
                             <span class="resultado-dominio">📁 ${escapeHtml(dominio)}</span>
-                            <button class="btn-copiar" data-script="${escapeHtml(scriptHtml)}">Copiar</button>
+                            <button class="btn-copiar" onclick="copiarScript(this)">Copiar</button>
+
                         </div>
                         <div class="script-code">${escapeHtml(scriptHtml)}</div>
                     `;
@@ -288,20 +289,22 @@
             }
         }
 
-        async function copiarScript(script) {
-            // Não precisa remover nada, o script já está correto
-            try {
-                await navigator.clipboard.writeText(script);
+        function copiarScript(botao) {
+            // Pega o elemento irmão que contém o script
+            const scriptCodeDiv = botao.parentElement.nextElementSibling;
+            let textoParaCopiar = scriptCodeDiv.innerText;
+            
+            navigator.clipboard.writeText(textoParaCopiar).then(() => {
                 alert('✅ Script copiado!');
-            } catch (err) {
+            }).catch(() => {
                 const textarea = document.createElement('textarea');
-                textarea.value = script;
+                textarea.value = textoParaCopiar;
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 alert('✅ Script copiado!');
-            }
+            });
         }
 
         function escapeHtml(text) {
